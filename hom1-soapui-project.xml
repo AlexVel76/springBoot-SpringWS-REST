@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="9b0ef0d5-f200-45bc-bd09-82e0a25392f6" activeEnvironment="Default" name="hom1" resourceRoot="" soapui-version="5.4.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="f3c195d4-786e-4e89-8a40-bd6374d93d03" wsaVersion="NONE" name="UserEventResourceSoap11" type="wsdl" bindingName="{http://localhost/hometask/entity}UserEventResourceSoap11" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/ws/userevent.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/ws/userevent.wsdl"><con:part><con:url>http://localhost:8080/ws/userevent.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://localhost/hometask/entity" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://localhost/hometask/entity" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://localhost/hometask/entity">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://localhost/hometask/entity" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="getUserRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getUserResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="user" type="tns:user"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getEventRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getEventResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="event" type="tns:event"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="auditorium">
+        <xs:complexContent>
+          <xs:extension base="tns:item">
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="events" nillable="true" type="tns:event"/>
+              <xs:element minOccurs="0" name="name" type="xs:string"/>
+              <xs:element name="numberOfSeats" type="xs:long"/>
+              <xs:element minOccurs="0" name="vipSeats" type="xs:string"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="item">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="event">
+        <xs:complexContent>
+          <xs:extension base="tns:item">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="name" type="xs:string"/>
+              <xs:element minOccurs="0" name="airDate" type="xs:string"/>
+              <xs:element name="basePrice" type="xs:double"/>
+              <xs:element minOccurs="0" name="rating" type="tns:eventRating"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="ticket">
+        <xs:complexContent>
+          <xs:extension base="tns:item">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="dateTime" type="xs:string"/>
+              <xs:element minOccurs="0" name="event" type="tns:event"/>
+              <xs:element name="price" type="xs:double"/>
+              <xs:element name="seat" type="xs:long"/>
+              <xs:element minOccurs="0" name="user" type="tns:user"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="user">
+        <xs:complexContent>
+          <xs:extension base="tns:item">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+              <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+              <xs:element minOccurs="0" name="email" type="xs:string"/>
+              <xs:element minOccurs="0" name="birthdate" type="xs:string"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="tickets" nillable="true" type="tns:ticket"/>
+              <xs:element minOccurs="0" name="description" type="xs:string"/>
+              <xs:element name="luckyUser" type="xs:boolean"/>
+              <xs:element minOccurs="0" name="login" type="xs:string"/>
+              <xs:element minOccurs="0" name="password" type="xs:string"/>
+              <xs:element minOccurs="0" name="roles" type="xs:string"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="userAccount">
+        <xs:complexContent>
+          <xs:extension base="tns:item">
+            <xs:sequence>
+              <xs:element name="amount" type="xs:double"/>
+              <xs:element minOccurs="0" name="user" type="tns:user"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:simpleType name="eventRating">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="LOW"/>
+          <xs:enumeration value="MID"/>
+          <xs:enumeration value="HIGH"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getUserResponse">
+    <wsdl:part element="tns:getUserResponse" name="getUserResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getEventResponse">
+    <wsdl:part element="tns:getEventResponse" name="getEventResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUserRequest">
+    <wsdl:part element="tns:getUserRequest" name="getUserRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getEventRequest">
+    <wsdl:part element="tns:getEventRequest" name="getEventRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="UserEventResource">
+    <wsdl:operation name="getUser">
+      <wsdl:input message="tns:getUserRequest" name="getUserRequest"></wsdl:input>
+      <wsdl:output message="tns:getUserResponse" name="getUserResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEvent">
+      <wsdl:input message="tns:getEventRequest" name="getEventRequest"></wsdl:input>
+      <wsdl:output message="tns:getEventResponse" name="getEventResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UserEventResourceSoap11" type="tns:UserEventResource">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getUser">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getUserRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUserResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEvent">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getEventRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getEventResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserEventResourceService">
+    <wsdl:port binding="tns:UserEventResourceSoap11" name="UserEventResourceSoap11">
+      <soap:address location="http://localhost:8080/ws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/ws</con:endpoint></con:endpoints><con:operation id="f80d5d68-7da0-49f2-ae2b-f3a82a0a358d" isOneWay="false" action="" name="getEvent" bindingOperationName="getEvent" type="Request-Response" outputName="getEventResponse" inputName="getEventRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3c1e34c8-af7d-4139-a4c4-cc6298cabb7e" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ent="http://localhost/hometask/entity">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ent:getEventRequest>\r
+         <ent:id>?</ent:id>\r
+      </ent:getEventRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://localhost/hometask/entity/UserEventResource/getEventRequest"/></con:call></con:operation><con:operation id="9c27e925-0a3e-4266-835e-e06d84f5ba1b" isOneWay="false" action="" name="getUser" bindingOperationName="getUser" type="Request-Response" outputName="getUserResponse" inputName="getUserRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b6306cf3-9830-4728-9a96-b292cbef92f3" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ent="http://localhost/hometask/entity">\r
+
+   <soapenv:Body>\r
+      <ent:getUserRequest>\r
+         <ent:id>5</ent:id>\r
+      </ent:getUserRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>user1</con:username><con:password>password</con:password><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://localhost/hometask/entity/UserEventResource/getUserRequest" addDefaultAction="false"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="54f23a51-f7e9-4e4e-a8e8-9954bdd6fa4b" name="UserEventResourceSoap11 TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="bd961fcd-4e44-4ba6-b2cb-9cd29fbef3be" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getEvent TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="cf621c97-d8d9-49e1-b8e0-ae80471d798c" name="getEvent"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>UserEventResourceSoap11</con:interface><con:operation>getEvent</con:operation><con:request name="getEvent" id="0137e152-7918-43b9-9aab-3a9e07606cf2"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ent="http://localhost/hometask/entity">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ent:getEventRequest>\r
+         <ent:id>?</ent:id>\r
+      </ent:getEventRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://localhost/hometask/entity/UserEventResource/getEventRequest"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="91ea7289-799e-47ee-89c6-04764f461c08" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getUser TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="f31a4027-cd1e-443b-817c-35adbd213ea5" name="getUser"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>UserEventResourceSoap11</con:interface><con:operation>getUser</con:operation><con:request name="getUser" id="bb36ce59-99d6-4cf5-b9a8-1ee8eeb621cb"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ent="http://localhost/hometask/entity">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ent:getUserRequest>\r
+         <ent:id>?</ent:id>\r
+      </ent:getUserRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://localhost/hometask/entity/UserEventResource/getUserRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

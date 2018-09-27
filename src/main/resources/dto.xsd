@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="http://localhost/hometask/entity" xmlns:tns="http://localhost/hometask/entity" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="getUserRequest">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="id" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="user" type="tns:user"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getAllUserRequest">
+    <xs:complexType/>
+  </xs:element>
+
+  <xs:element name="getAllUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="user" type="tns:user" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:element name="getEventRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getEventResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="event" type="tns:event"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getAllEventRequest">
+    <xs:complexType/>
+  </xs:element>
+
+  <xs:element name="getAllEventResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="event" type="tns:event" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:complexType name="auditorium">
+    <xs:complexContent>
+      <xs:extension base="tns:item">
+        <xs:sequence>
+          <xs:element name="events" type="tns:event" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="name" type="xs:string" minOccurs="0"/>
+          <xs:element name="numberOfSeats" type="xs:long"/>
+          <xs:element name="vipSeats" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="item">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="event">
+    <xs:complexContent>
+      <xs:extension base="tns:item">
+        <xs:sequence>
+          <xs:element name="name" type="xs:string" minOccurs="0"/>
+          <xs:element name="airDate" type="xs:string" minOccurs="0"/>
+          <xs:element name="basePrice" type="xs:double"/>
+          <xs:element name="rating" type="tns:eventRating" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+
+  <xs:complexType name="ticket">
+    <xs:complexContent>
+      <xs:extension base="tns:item">
+        <xs:sequence>
+          <xs:element name="dateTime" type="xs:string" minOccurs="0"/>
+          <xs:element name="event" type="tns:event" minOccurs="0"/>
+          <xs:element name="price" type="xs:double"/>
+          <xs:element name="seat" type="xs:long"/>
+          <xs:element name="user" type="tns:user" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="user">
+    <xs:complexContent>
+      <xs:extension base="tns:item">
+        <xs:sequence>
+          <xs:element name="firstName" type="xs:string" minOccurs="0"/>
+          <xs:element name="lastName" type="xs:string" minOccurs="0"/>
+          <xs:element name="email" type="xs:string" minOccurs="0"/>
+          <xs:element name="birthdate" type="xs:string" minOccurs="0"/>
+          <xs:element name="description" type="xs:string" minOccurs="0"/>
+          <xs:element name="luckyUser" type="xs:boolean"/>
+          <xs:element name="login" type="xs:string" minOccurs="0"/>
+          <xs:element name="password" type="xs:string" minOccurs="0"/>
+          <xs:element name="roles" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="userAccount">
+    <xs:complexContent>
+      <xs:extension base="tns:item">
+        <xs:sequence>
+          <xs:element name="amount" type="xs:double"/>
+          <xs:element name="user" type="tns:user" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:simpleType name="eventRating">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="LOW"/>
+      <xs:enumeration value="MID"/>
+      <xs:enumeration value="HIGH"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+
